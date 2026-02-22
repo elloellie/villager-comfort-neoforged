@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.elleoellie.villagercomfort.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "villagercomfort.refmap.json",
+  "mixins": [
+    "VillagerMixin"
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}
