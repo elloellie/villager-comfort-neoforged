@@ -36,6 +36,7 @@ public class ComfortDataEvents {
             villager.getData(COMFORT);
 //            System.out.println("SUCCESFULLY ATTACHED COMFORT VALUES!");
 //            System.out.println("Comfort at Attachment: " + villager.getData(COMFORT));
+
         }
     }
 

@@ -240,7 +240,7 @@ public class ComfortHelper
 
 //            LOGGER.info("days_without_sleep: " + days_without_sleep + " days_without_zombie: " + days_without_zombie + " days_without_outside: " + days_without_outside);
 //            LOGGER.info("has_bed: " + has_bed + " has_workplace: " + has_workplace);
-//            LOGGER.info(" comfort: " + comfort);
+            LOGGER.info(" comfort: " + comfort);
 
             return comfort;
         }

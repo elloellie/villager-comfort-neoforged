@@ -15,7 +15,7 @@ loaderVersion="${loader_version_range}" #mandatory
 license="MIT"
 
 # A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+issueTrackerURL="https://github.com/elloellie/villager-comfort-neoforged/issues" #optional
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
@@ -39,14 +39,14 @@ displayName="${mod_name}" #mandatory
 #logoFile="examplemod.png" #optional
 
 # A text field displayed in the mod UI
-credits="Originally created by ghenghen_ for 1.19.2. Ported to 1.20.1 by leahx_y2k." #optional
+credits="Originally created by ghen for 1.19.2. Ported to 1.20.1 by leahx_y2k!" #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-authors="Elleoellie, leahx_y2k, ghenghen_"
+authors="ElleoEllie, leahx_y2k, ghenghen_"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Villager prices depend on how comfortable their lifestyle is. Updated for Neoforge 1.21.1!
+Villager prices depend on how comfortable their lifestyle is. Now updated for Neoforge 1.21.1!
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
