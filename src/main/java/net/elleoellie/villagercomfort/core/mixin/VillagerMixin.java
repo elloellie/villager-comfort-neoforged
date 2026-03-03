@@ -4,27 +4,20 @@ import net.elleoellie.villagercomfort.comfort.BedroomComfortValues;
 import net.elleoellie.villagercomfort.comfort.ComfortHelper;
 import net.elleoellie.villagercomfort.comfort.WorkplaceComfortValues;
 import net.elleoellie.villagercomfort.Config;
-import net.elleoellie.villagercomfort.dataattachment.ComfortData;
+import net.elleoellie.villagercomfort.network.packet.VillagerInfoPacket;
 import net.elleoellie.villagercomfort.util.ComfortTags;
-import net.elleoellie.villagercomfort.util.TagChecker;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.schedule.Activity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SpyglassItem;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
-import java.util.Optional;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,7 +27,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static net.elleoellie.villagercomfort.dataattachment.ComfortData.*;
-import static net.elleoellie.villagercomfort.util.TagChecker.TagCheckerValidate;
 
 @Mixin(Villager.class)
 public class VillagerMixin
@@ -84,9 +76,9 @@ public class VillagerMixin
             if (villager.hasData(COMFORT)){
                 int current_day = (int) (villager.level().getDayTime() / 24000L);
 
-                if (villager.getData(CURRENT_DAY_FOR_MEASURING_OUTSIDE_TICKS) != current_day) {
+                if (villager.getData(CURRENT_DAY) != current_day) {
                     villager.setData(TODAY_OUTSIDE_TICKS, 0) ;
-                    villager.setData(CURRENT_DAY_FOR_MEASURING_OUTSIDE_TICKS, current_day);
+                    villager.setData(CURRENT_DAY, current_day);
                 }
 
                 if (villager.level().getBrightness(LightLayer.SKY, villager.blockPosition()) > 12) {
@@ -126,7 +118,7 @@ public class VillagerMixin
     private void giveComfortDataOnInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> callback){
         Villager villager = ((Villager)(Object)this);
        ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
+       //  Item item = itemstack.getItem();
 
 //        TagCheckerValidate(player.getItemInHand(hand));
 //
@@ -134,28 +126,33 @@ public class VillagerMixin
 //
 //        Item itemForComfortData = Items.SPYGLASS;
 
+
         if (itemstack.is(ComfortTags.Items.COMFORT_DISPLAY_ITEMS)) {
-            if (!villager.level().isClientSide) {
-                player.sendSystemMessage(Component.literal("COMFORT: " + villager.getData(ComfortData.COMFORT)));
-                player.sendSystemMessage(Component.literal("BEDROOM SIZE: " + villager.getData(BEDROOMSIZE)));
-                player.sendSystemMessage(Component.literal("NUMBER OF BEDS IN BEDROOM: " + villager.getData(BEDSCOUNT)));
-                player.sendSystemMessage(Component.literal("LIGHT LEVEL IN BEDROOM: " + villager.getData(BEDROOMLIGHT)));
-                player.sendSystemMessage(Component.literal("IS WORKSTATION IN BEDROOM? " + villager.getData(ISWORKSTATIONINBEDROOM)));
-                player.sendSystemMessage(Component.literal("WORKPLACE SIZE: " + villager.getData(WORKPLACESIZE)));
-                player.sendSystemMessage(Component.literal("NUMBER OF WORKSTATIONS IN WORKPLACE: " + villager.getData(WORKSTATIONSCOUNT)));
-                player.sendSystemMessage(Component.literal("LIGHT LEVEL IN WORKPLACE: " + villager.getData(WORKPLACELIGHT)));
-               // player.sendSystemMessage(Component.literal("TICKS SPENT OUTSIDE: " + villager.getData(OUTSIDETICKS)));
-                // player.sendSystemMessage(Component.literal("DAYS SINCE LAST OUTSIDE: " + villager.getData(DAYSWITHOUTOUTSIDE)));
-                player.sendSystemMessage(Component.literal("DISTANCE BETWEEN BED AND WORKSTATION: " + villager.getData(BEDWORKSTATIONDISTANCE)));
-               // player.sendSystemMessage(Component.literal("TICKS SPENT OUTSIDE TODAY: " + villager.getData(TODAY_OUTSIDE_TICKS)));
-                // player.sendSystemMessage(Component.literal("WORKSTATION POSITION: " + villager.getData(LAST_REMEMBERED_WORKSTATION_POS)));
-            } else {
+            if (!villager.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
+                PacketDistributor.sendToPlayer(serverPlayer, new VillagerInfoPacket(villager));
+            }
+//            if (!villager.level().isClientSide) {
+//                player.sendSystemMessage(Component.literal("COMFORT: " + villager.getData(ComfortData.COMFORT)));
+//                player.sendSystemMessage(Component.literal("BEDROOM SIZE: " + villager.getData(BEDROOMSIZE)));
+//                player.sendSystemMessage(Component.literal("NUMBER OF BEDS IN BEDROOM: " + villager.getData(BEDSCOUNT)));
+//                player.sendSystemMessage(Component.literal("LIGHT LEVEL IN BEDROOM: " + villager.getData(BEDROOMLIGHT)));
+//                player.sendSystemMessage(Component.literal("IS WORKSTATION IN BEDROOM? " + villager.getData(ISWORKSTATIONINBEDROOM)));
+//                player.sendSystemMessage(Component.literal("WORKPLACE SIZE: " + villager.getData(WORKPLACESIZE)));
+//                player.sendSystemMessage(Component.literal("NUMBER OF WORKSTATIONS IN WORKPLACE: " + villager.getData(WORKSTATIONSCOUNT)));
+//                player.sendSystemMessage(Component.literal("LIGHT LEVEL IN WORKPLACE: " + villager.getData(WORKPLACELIGHT)));
+//               // player.sendSystemMessage(Component.literal("TICKS SPENT OUTSIDE: " + villager.getData(OUTSIDETICKS)));
+//                // player.sendSystemMessage(Component.literal("DAYS SINCE LAST OUTSIDE: " + villager.getData(DAYSWITHOUTOUTSIDE)));
+//                player.sendSystemMessage(Component.literal("DISTANCE BETWEEN BED AND WORKSTATION: " + villager.getData(BEDWORKSTATIONDISTANCE)));
+//               // player.sendSystemMessage(Component.literal("TICKS SPENT OUTSIDE TODAY: " + villager.getData(TODAY_OUTSIDE_TICKS)));
+//                // player.sendSystemMessage(Component.literal("WORKSTATION POSITION: " + villager.getData(LAST_REMEMBERED_WORKSTATION_POS)));
+//            }
+            else {
                 callback.setReturnValue(InteractionResult.FAIL);
             }
         }
     }
 
-    @Inject(method = "startTrading", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/npc/Villager;setTradingPlayer(Lnet/minecraft/world/entity/player/Player;)V"), cancellable = true)
+    @Inject(method = "startTrading", at = @At(value = "HEAD", target = "Lnet/minecraft/world/entity/npc/Villager;setTradingPlayer(Lnet/minecraft/world/entity/player/Player;)V"), cancellable = true)
     private void preventTradingWhenHoldingItem (Player player, CallbackInfo callbackInfo) {
     ItemStack itemstack = player.getItemInHand(InteractionHand.MAIN_HAND);
 //        Item item = itemstack.getItem();

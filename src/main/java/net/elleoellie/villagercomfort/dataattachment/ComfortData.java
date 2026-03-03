@@ -1,7 +1,6 @@
 package net.elleoellie.villagercomfort.dataattachment;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.nbt.CompoundTag;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -16,30 +15,34 @@ public class ComfortData {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
             DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, MOD_ID);
 
-    public static final Supplier<AttachmentType<Integer>> BEDROOMSIZE = ATTACHMENT_TYPES.register(
-            "bedroomsize", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> BEDSCOUNT = ATTACHMENT_TYPES.register(
-            "bedscount", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> BEDROOMLIGHT = ATTACHMENT_TYPES.register(
-            "bedroomlight", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Boolean>> ISWORKSTATIONINBEDROOM = ATTACHMENT_TYPES.register(
-            "isworkstationinbedroom", () -> AttachmentType.<Boolean>builder(() -> false).serialize(Codec.BOOL).build());
-    public static final Supplier<AttachmentType<Integer>> WORKPLACESIZE = ATTACHMENT_TYPES.register(
-            "workplacesize", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> WORKSTATIONSCOUNT = ATTACHMENT_TYPES.register(
-            "workstationscount", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> WORKPLACELIGHT = ATTACHMENT_TYPES.register(
-            "workplacelight", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> OUTSIDETICKS = ATTACHMENT_TYPES.register(
-            "outsideticks", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> DAYSWITHOUTOUTSIDE = ATTACHMENT_TYPES.register(
-            "dayswithoutoutside", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> BEDWORKSTATIONDISTANCE = ATTACHMENT_TYPES.register(
-            "bedworkstationdistance", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> BEDROOM_SIZE = ATTACHMENT_TYPES.register(
+            "bedroom_size", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> BEDS_COUNT = ATTACHMENT_TYPES.register(
+            "beds_count", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> BEDROOM_LIGHT = ATTACHMENT_TYPES.register(
+            "bedroom_light", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+
+    public static final Supplier<AttachmentType<Boolean>> IS_WORKSTATION_IN_BEDROOM = ATTACHMENT_TYPES.register(
+            "is_workstation_in_bedroom", () -> AttachmentType.<Boolean>builder(() -> false).serialize(Codec.BOOL).build());
+    public static final Supplier<AttachmentType<Boolean>> HAS_BED = ATTACHMENT_TYPES.register(
+            "has_bed", () -> AttachmentType.<Boolean>builder(() -> false).serialize(Codec.BOOL).build());
+    public static final Supplier<AttachmentType<Boolean>> HAS_WORKSTATION = ATTACHMENT_TYPES.register(
+            "has_workstation", () -> AttachmentType.<Boolean>builder(() -> false).serialize(Codec.BOOL).build());
+
+    public static final Supplier<AttachmentType<Integer>> WORKPLACE_SIZE = ATTACHMENT_TYPES.register(
+            "workplace_size", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> WORKSTATIONS_COUNT = ATTACHMENT_TYPES.register(
+            "workstations_count", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> WORKPLACE_LIGHT = ATTACHMENT_TYPES.register(
+            "workplace_light", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> BED_WORKSTATION_DISTANCE = ATTACHMENT_TYPES.register(
+            "bed_workstation_distance", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+
+
     public static final Supplier<AttachmentType<Integer>> TODAY_OUTSIDE_TICKS = ATTACHMENT_TYPES.register(
             "today_outside_ticks", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
-    public static final Supplier<AttachmentType<Integer>> CURRENT_DAY_FOR_MEASURING_OUTSIDE_TICKS = ATTACHMENT_TYPES.register(
-            "current_day_for_measuring_outside_ticks", () -> AttachmentType.<Integer>builder(() -> -2).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> CURRENT_DAY = ATTACHMENT_TYPES.register(
+            "current_day", () -> AttachmentType.<Integer>builder(() -> -2).serialize(Codec.INT).build());
     public static final Supplier<AttachmentType<Integer>> LAST_DAY_OUTSIDE = ATTACHMENT_TYPES.register(
             "last_day_outside", () -> AttachmentType.<Integer>builder(() -> -2).serialize(Codec.INT).build());
     public static final Supplier<AttachmentType<Long>> LAST_REMEMBERED_WORKSTATION_POS = ATTACHMENT_TYPES.register(
@@ -48,6 +51,13 @@ public class ComfortData {
             "last_sleep_day", () -> AttachmentType.<Integer>builder(() -> -2).serialize(Codec.INT).build());
     public static final Supplier<AttachmentType<Integer>> LAST_ZOMBIE_DAY = ATTACHMENT_TYPES.register(
             "last_zombie_day", () -> AttachmentType.<Integer>builder(() -> -2).serialize(Codec.INT).build());
+
+    //    public static final Supplier<AttachmentType<Integer>> OUTSIDE_TICKS = ATTACHMENT_TYPES.register(
+//            "outside_ticks", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    public static final Supplier<AttachmentType<Integer>> DAYS_WITHOUT_OUTSIDE = ATTACHMENT_TYPES.register(
+            "days_without_outside", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+
+
     public static final Supplier<AttachmentType<Integer>> COMFORT = ATTACHMENT_TYPES.register(
             "comfort", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
 

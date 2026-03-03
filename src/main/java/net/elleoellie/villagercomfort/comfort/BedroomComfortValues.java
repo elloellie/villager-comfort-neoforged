@@ -59,12 +59,12 @@ public class BedroomComfortValues
         if(workstation != null)
         {
             int blockDistance = (int) Math.sqrt(bedPos.distSqr(workstation.pos()));
-            villager.setData(BEDWORKSTATIONDISTANCE, blockDistance);
+            villager.setData(BED_WORKSTATION_DISTANCE, blockDistance);
         }
 
-        villager.setData(BEDROOMSIZE, roomSize.get());
-        villager.setData(BEDSCOUNT, bedsCount.get() / 2);
-        villager.setData(BEDROOMLIGHT, maxLightValue.get());
-        villager.setData(ISWORKSTATIONINBEDROOM, isWorkstationInBedroom.get());
+        villager.setData(BEDROOM_SIZE, roomSize.get());
+        villager.setData(BEDS_COUNT, bedsCount.get() / 2);
+        villager.setData(BEDROOM_LIGHT, maxLightValue.get());
+        villager.setData(IS_WORKSTATION_IN_BEDROOM, isWorkstationInBedroom.get());
     }
 }

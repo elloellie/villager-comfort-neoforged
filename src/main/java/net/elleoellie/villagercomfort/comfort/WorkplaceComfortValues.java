@@ -53,9 +53,9 @@ public class WorkplaceComfortValues
                 }
             });
 
-            villager.setData(WORKPLACESIZE, roomSize.get());
-            villager.setData(WORKSTATIONSCOUNT, workstationsCount.get());
-            villager.setData(WORKPLACELIGHT, maxLightValue.get());
+            villager.setData(WORKPLACE_SIZE, roomSize.get());
+            villager.setData(WORKSTATIONS_COUNT, workstationsCount.get());
+            villager.setData(WORKPLACE_LIGHT, maxLightValue.get());
         });
     }
 }
