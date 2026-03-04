@@ -126,7 +126,6 @@ public class VillagerMixin
 //
 //        Item itemForComfortData = Items.SPYGLASS;
 
-
         if (itemstack.is(ComfortTags.Items.COMFORT_DISPLAY_ITEMS)) {
             if (!villager.level().isClientSide && player instanceof ServerPlayer serverPlayer) {
                 PacketDistributor.sendToPlayer(serverPlayer, new VillagerInfoPacket(villager));

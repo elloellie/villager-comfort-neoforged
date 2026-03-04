@@ -11,7 +11,7 @@
 
   "gui.villagercomfort.no_bed_tooltip": "This villager does not have a bed.",
   "gui.villagercomfort.workstation_in_bedroom_tooltip": "This villager's bed and workstation are in the same room.",
-  "gui.villagercomfort.trapped_inside_tooltip": "This villager hasn't been outside recently.",
+  "gui.villagercomfort.trapped_inside_tooltip": "This villager hasn't been outside enough recently.",
   "gui.villagercomfort.too_many_beds_tooltip": "There are too many beds in this villager's room.",
   "gui.villagercomfort.too_many_workstations_tooltip": "There are too many workstations in this villager's workplace.",
   "gui.villagercomfort.insomnia_tooltip": "This villager hasn't been able to sleep.",

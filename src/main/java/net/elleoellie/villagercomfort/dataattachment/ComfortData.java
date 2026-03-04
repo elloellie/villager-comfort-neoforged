@@ -53,7 +53,7 @@ public class ComfortData {
             "last_zombie_day", () -> AttachmentType.<Integer>builder(() -> -2).serialize(Codec.INT).build());
 
     //    public static final Supplier<AttachmentType<Integer>> OUTSIDE_TICKS = ATTACHMENT_TYPES.register(
-//            "outside_ticks", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
+    //            "outside_ticks", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
     public static final Supplier<AttachmentType<Integer>> DAYS_WITHOUT_OUTSIDE = ATTACHMENT_TYPES.register(
             "days_without_outside", () -> AttachmentType.<Integer>builder(() -> 0).serialize(Codec.INT).build());
 
